@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Metales Ingeniería y Construcción</title>        
+ 
+    <link rel="stylesheet" href="http://localhost/mimco/css/estilos.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/mimco/css/nav.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/mimco/css/theme.css" type="text/css">   
+
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="Content-Language" content="es"> 
+
+    <meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
+    <script type="text/javascript" src="http://localhost/mimco/js/jquery.js"></script>    
+ 
+    <script type="text/javascript" src="http://localhost/mimco/js/compras/ocompra.js"></script>
+ 
+</head>
+<body>
+<div id="container">
+    <div class="header">REPORTE DE INDICADORES DE REQUISICIONES ATENDIDAS</div>	
+    <div class="case_top2">
+        
+        <form  class="frmAtendidas"  method="post" enctype="multipart/form-data" id="frmAtendidas">
+            <table width="98%" cellspacing="0" cellpadding="3" border="0" style="margin-top:5px;">
+                <tbody>
+                    <tr>
+                        <td align="right" width="18%"><span>PERIODO POR AÑO</span></td>
+                        <td align="left">
+                            <select disabled class="comboMedio" name="anio" id="anio">
+                                <option selected="selected" value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012 - Incompleto</option>
+                            </select>
+                        </td>  
+                        
+                        <td align="right" width="19%"><span>REQUISICIONES SOLICITADAS PARA</span></td>
+                        <td align="left" width="156">
+						<select class="desplegable" onchange="if(options[selectedIndex].value){location = options[selectedIndex].value}" class="desplegable" name="menu" size="1">
+						<option value="http://localhost/mimco/index.php/compras/ocompra/indicador_requis_materiales_estatico">Materiales</option>
+						<option value="http://localhost/mimco/index.php/compras/ocompra/indicador_requis_transporte_estatico" selected>Transporte</option>
+						<option value="http://localhost/mimco/index.php/compras/ocompra/indicador_requis_otros_estatico">Otros Servicios</option>
+						</select>                            
+                        </td>  
+                        
+                        <!--td align="right" width="18%"><span></span></td-->
+                        
+                        
+                        <td align="left" width="32%">
+                            <span>
+                                <input type="hidden" name="ver" id="ver">
+                                 <input type="hidden" name="tipo" id="tipo">
+                                 
+                                &nbsp;</span></td>   
+                        
+                    </tr>                                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    
+    <div class="case_botones">
+        <ul class="lista_botones"><li id="salir" class="atendidas">Salir</li></ul>          
+        <!--ul class="lista_botones"><li id="grafica" class="atendidas">Ver Gráfica</li></ul-->        
+        <ul class="lista_botones"><li id="excel" class="atendidas">Ver Excel</li></ul>
+        <ul class="lista_botones"><li id="pdf" class="atendidas">Ver Pdf</li></ul>
+    </div> 
+    
+    
+    <span style="float:left;width:80%;text-align:left;font-size:14px;margin-top:40px;">
+    Requisiciones de Transporte para el año 2011    (Servicio Transporte 
+	Nacional)    </span>	
+        <div style="clear:both;">
+            <table border='1' width='100%'>
+                <THEAD>
+                <tr class="cabeceraTabla">
+                    <td width='200px;'>CONCEPTO MES</td>
+                    <td width='120px;'>ENERO</td>
+                    <td width='120px;'>FEBRERO</td>
+                    <td width='120px;'>MARZO</td>
+                    <td width='120px;'>ABRIL</td>
+                    <td width='120px;'>MAYO</td>
+                    <td width='120px;'>JUNIO</td>
+                    <td width='120px;'>JULIO</td>
+                    <td width='120px;'>AGOSTO</td>
+                    <td width='120px;'>SETIEMBRE</td>
+                    <td width='120px;'>OCTUBRE</td>
+                    <td width='120px;'>NOVIEMBRE</td>
+                    <td width='120px;'>DICIEMBRE</td>
+                    <td width='100px;'>TOTAL</td>
+                </tr>
+                </THEAD>
+               <tbody>
+               <tr>
+               <td>REQUISICIONES EFECTUADAS</td><td>
+		59</td>
+		<td>
+		27</td>
+		<td>
+		36</td>
+		<td>
+		22</td>
+		<td>
+		21</td>
+		<td>
+		18</td>
+		<td>
+		28</td>
+		<td>
+		29</td>
+		<td>
+		37</td>
+		<td>
+		25</td>
+		<td>
+		37</td>
+		<td>
+		55</td>
+		<td>
+		394</td>
+               
+               </tr>
+               <tr>
+               <td>REQUISICIONES ATENDIDAS</td><td>
+		12</td>
+		<td>
+		5</td>
+		<td>
+		22</td>
+		<td>
+		0</td>
+		<td>
+		13</td>
+		<td>
+		3</td>
+		<td>
+		19</td>
+		<td>
+		14</td>
+		<td>
+		26</td>
+		<td>
+		17</td>
+		<td>
+		18</td>
+		<td>
+		4</td>
+		<td>
+		153</td>
+               </tr>
+               <tr>
+               <td>ÍNDICE DE ATENCIÓN (%)</td><td>
+		20.34</td>
+		<td>
+		18.52</td>
+		<td>
+		61.11</td>
+		<td>
+		0.00</td>
+		<td>
+		61.90</td>
+		<td>
+		16.67</td>
+		<td>
+		67.86</td>
+		<td>
+		48.28</td>
+		<td>
+		70.27</td>
+		<td>
+		68.00</td>
+		<td>
+		48.65</td>
+		<td>
+		7.27</td>
+		<td>
+		40.74</td>               </tr>
+               <tr>
+               <td>Atendidas en 24h o menos</td><td>
+		11</td>
+		<td>
+		4</td>
+		<td>
+		8</td>
+		<td>
+		0</td>
+		<td>
+		13</td>
+		<td>
+		3</td>
+		<td>
+		19</td>
+		<td>
+		13</td>
+		<td>
+		26</td>
+		<td>
+		17</td>
+		<td>
+		18</td>
+		<td>
+		4</td>
+		<td>
+		136</td>
+
+               </tr>
+               <tr>
+               <td>Atendidas entre 24 y 48h</td><td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>               </tr>
+               <tr>
+               <td>Atendidas en más de 48h</td><td>
+		1</td>
+		<td>
+		1</td>
+		<td>
+		14</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		1</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		17</td>
+
+               </tr>
+                
+			 </tbody>
+            </table>
+        </div>		
+        
+        
+<br><br>
+        
+        
+    <span style="float:left;width:80%;text-align:left;font-size:14px;margin-top:40px;">
+    Requisiciones de Transporte para el año 2011    (Servicio Transporte Acarreo 
+	de Material)    </span>	
+        <div style="clear:both;">
+            <table border='1' width='100%'>
+                <THEAD>
+                <tr class="cabeceraTabla">
+                    <td width='200px;'>CONCEPTO MES</td>
+                    <td width='120px;'>ENERO</td>
+                    <td width='120px;'>FEBRERO</td>
+                    <td width='120px;'>MARZO</td>
+                    <td width='120px;'>ABRIL</td>
+                    <td width='120px;'>MAYO</td>
+                    <td width='120px;'>JUNIO</td>
+                    <td width='120px;'>JULIO</td>
+                    <td width='120px;'>AGOSTO</td>
+                    <td width='120px;'>SETIEMBRE</td>
+                    <td width='120px;'>OCTUBRE</td>
+                    <td width='120px;'>NOVIEMBRE</td>
+                    <td width='120px;'>DICIEMBRE</td>
+                    <td width='100px;'>TOTAL</td>
+                </tr>
+                </THEAD>
+               <tbody>
+               <tr>
+               <td>REQUISICIONES EFECTUADAS</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td>
+               
+               </tr>
+               <tr>
+               <td>REQUISICIONES ATENDIDAS</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td>
+               </tr>
+               <tr>
+               <td>ÍNDICE DE ATENCIÓN (%)</td><td>0.00</td><td>0.00</td><td>
+				0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>
+				0.00</td><td>
+				0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>
+				0.00</td><td>
+				0.00</td>
+               </tr>
+               <tr>
+               <td>Atendidas en 24h o menos</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td>               </tr>
+               <tr>
+               <td>Atendidas entre 24 y 48h</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td>               </tr>
+               <tr>
+               <td>Atendidas en más de 48h</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td>
+               </tr>
+                
+			 </tbody>
+            </table>
+        </div>		
+
+
+
+<br><br>
+
+    <span style="float:left;width:80%;text-align:left;font-size:14px;margin-top:40px;">
+    Requisiciones de Transporte para el año 2011    (Servicio Transporte 
+	Internacional)    </span>	
+        <div style="clear:both;">
+            <table border='1' width='100%'>
+                <THEAD>
+                <tr class="cabeceraTabla">
+                    <td width='200px;'>CONCEPTO MES</td>
+                    <td width='120px;'>ENERO</td>
+                    <td width='120px;'>FEBRERO</td>
+                    <td width='120px;'>MARZO</td>
+                    <td width='120px;'>ABRIL</td>
+                    <td width='120px;'>MAYO</td>
+                    <td width='120px;'>JUNIO</td>
+                    <td width='120px;'>JULIO</td>
+                    <td width='120px;'>AGOSTO</td>
+                    <td width='120px;'>SETIEMBRE</td>
+                    <td width='120px;'>OCTUBRE</td>
+                    <td width='120px;'>NOVIEMBRE</td>
+                    <td width='120px;'>DICIEMBRE</td>
+                    <td width='100px;'>TOTAL</td>
+                </tr>
+                </THEAD>
+               <tbody>
+               <tr>
+               <td>REQUISICIONES EFECTUADAS</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>3</td><td>2</td><td>2</td><td>0</td><td>
+				1</td><td>0</td><td>1</td><td>9</td>
+               
+               </tr>
+               <tr>
+               <td>REQUISICIONES ATENDIDAS</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				1</td><td>0</td><td>0</td><td>1</td>
+               </tr>
+               <tr>
+               <td>ÍNDICE DE ATENCIÓN (%)</td><td>0.00</td><td>0.00</td><td>
+				0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>
+				0.00</td><td>
+				0.00</td><td>0.00</td><td>100.00</td><td>0.00</td><td>
+				0.00</td><td>
+				8.33</td>
+               </tr>
+               <tr>
+               <td>Atendidas en 24h o menos</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				1</td><td>0</td><td>0</td><td>1</td>
+               </tr>
+               <tr>
+               <td>Atendidas entre 24 y 48h</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td>
+               </tr>
+               <tr>
+               <td>Atendidas en más de 48h</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>
+				0</td><td>0</td><td>0</td><td>0</td>
+               </tr>
+                
+			 </tbody>
+            </table>
+        </div>		
+
+<br>
+        
+</div>	
+</body>
+</html>

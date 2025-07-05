@@ -1,0 +1,216 @@
+
+select temp.cliente, 
+sum(temp.inicialdolares) as inicialdolares, 
+sum(temp.inicialsoles) as inicialsoles, 
+sum(temp.sumadolares) as sumadolares, 
+sum(temp.sumasoles) as sumasoles, 
+sum(temp.factDolares) as factDolares, 
+sum(temp.factSoles) as factSoles ,
+temp.codcli as codcli 
+from ( 
+--Las nuevas Ots en el intervalo. 
+
+select year(Ot.FecOt) as anio, 
+month(Ot.FecOt) as mes, 
+day(Ot.FecOt) as dia, 
+cli.RazCli as cliente, 
+0 as inicialdolares, 
+0 as inicialsoles, 
+(case when (Ot.EstOt=3) then ot.impOt else 0 end) as sumadolares, 
+(case when (Ot.EstOt=2) then ot.impOt else 0 end) as sumasoles, 
+0 as factDolares, 
+0 as factSoles, 
+Ot.FecOt as fecha, 
+ot.fec_reg as registro, 
+ot.nroOt as numero, 
+cli.codcli as codcli 
+from ot as ot 
+inner join clientes as cli 
+on (cli.codcli=ot.codcli and cli.codent=ot.codent) 
+where Ot.FecOt BETWEEN '01/01/2012' and '07/02/2012' and ot.tipot in (14) and ot.estado!='A' and ot.codent='01'
+
+--Lo facturado en el intervalo. 
+UNION select year(doc.fecdcto) as anio, 
+MONTH(doc.fecdcto) as mes, 
+day(doc.fecdcto) as dia, 
+cli.RazCli as cliente, 
+0 as inicialdolares, 
+0 as inicialsoles, 
+0 as sumadolares, 
+0 as sumasoles, 
+(case when (doc.mndcto=3) then doc.subtotal else 0 end) as factDolares, 
+(case when (doc.mndcto=2) then doc.subtotal else 0 end) as factSoles, 
+doc.fecdcto as fecha, 
+doc.fec_reg as registro, 
+ot.nroOt as numero, 
+cli.codcli as codcli 
+from documentos as doc 
+inner join clientes as cli 
+on (cli.codcli=doc.codcli and cli.codent=doc.codent) 
+inner join ot 
+on (ot.CodOt=doc.codot and ot.codent=doc.codent) 
+where doc.fecdcto BETWEEN '01/01/2012' and '07/02/2012' and doc.tipdcto='FV' and doc.codent='01' and doc.estdcto!='A' 
+and ot.tipot in (14) as temp group by temp.codcli,temp.cliente 
+
+
+
+
+
+
+
+
+
+
+
+select temp.codcli as codcli, 
+temp.numero as numero, 
+sum(temp.inicialdolares) as inicialdolares, 
+sum(temp.inicialsoles) as inicialsoles, 
+sum(temp.sumadolares) as sumadolares, 
+sum(temp.sumasoles) as sumasoles, 
+sum(temp.factDolares) as factDolares, 
+sum(temp.factSoles) as factSoles, 
+temp.codot as codot
+from ( 
+--Las nuevas Ots en el intervalo. 
+ 
+ select year(Ot.FecOt) as anio, 
+ month(Ot.FecOt) as mes, 
+ day(Ot.FecOt) as dia, 
+ cli.RazCli as cliente, 
+ 0 as inicialdolares, 
+ 0 as inicialsoles, 
+ (case when (Ot.EstOt=3) then ot.impOt else 0 end) as sumadolares, 
+ (case when (Ot.EstOt=2) then ot.impOt else 0 end) as sumasoles, 
+ 0 as factDolares, 
+ 0 as factSoles, 
+ Ot.FecOt as fecha, 
+ ot.fec_reg as registro, 
+ ot.nroOt as numero, 
+ cli.codcli as codcli, 
+ ot.codot as codot 
+ from ot as ot 
+ inner join clientes as cli 
+ on (cli.codcli=ot.codcli and cli.codent=ot.codent) 
+ where Ot.FecOt BETWEEN '01/01/2011' and '07/02/2012' and ot.tipot in (14) and ot.estado!='A' and ot.codent='01' 
+ 
+ --Lo facturado en el intervalo. 
+ UNION select year(doc.fecdcto) as anio, 
+ MONTH(doc.fecdcto) as mes, 
+ day(doc.fecdcto) as dia, 
+ cli.RazCli as cliente, 
+ 0 as inicialdolares, 
+ 0 as inicialsoles, 
+ 0 as sumadolares, 
+ 0 as sumasoles, 
+ (case when (doc.mndcto=3) then doc.subtotal else 0 end) as factDolares, 
+ (case when (doc.mndcto=2) then doc.subtotal else 0 end) as factSoles, 
+ doc.fecdcto as fecha,
+ doc.fec_reg as registro, 
+ ot.nroOt as numero, 
+ cli.codcli as codcli,
+ ot.codot as codot 
+from documentos as doc 
+
+inner join clientes as cli 
+on (cli.codcli=doc.codcli and cli.codent=doc.codent) 
+inner join ot 
+on (ot.CodOt=doc.codot and ot.codent=doc.codent) 
+where doc.fecdcto BETWEEN '01/01/2011' and '07/02/2012' and doc.tipdcto='FV' and doc.codent='01' and doc.estdcto!='A' and ot.tipot in (14) 
+
+) as temp group by temp.codot,temp.numero,temp.codcli having temp.codcli='005653' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select temp.cliente, 
+temp.inicialdolares as inicialdolares, 
+temp.inicialsoles as inicialsoles, 
+temp.sumadolares as sumadolares, 
+temp.sumasoles as sumasoles, 
+temp.factDolares as factDolares, 
+temp.factSoles as factSoles, 
+temp.mes as mes, 
+temp.mes as mes, 
+temp.dia as dia, 
+temp.anio as anio, 
+temp.numero as numero, 
+temp.codcli as codcli, 
+temp.codot as codot 
+
+from (
+
+   --Las nuevas Ots en el intervalo. 
+
+   select year(Ot.FecOt) as anio,
+   month(Ot.FecOt) as mes,
+   day(Ot.FecOt) as dia, 
+   cli.RazCli as cliente, 
+   0 as inicialdolares, 
+   0 as inicialsoles, 
+   (case when (Ot.EstOt=3) then ot.impOt else 0 end) as sumadolares, 
+   (case when (Ot.EstOt=2) then ot.impOt else 0 end) as sumasoles, 
+   0 as factDolares, 
+   0 as factSoles, 
+   Ot.FecOt as fecha, 
+   ot.fec_reg as registro, 
+   ot.nroOt as numero, 
+   cli.codcli as codcli, 
+   ot.codot as codot 
+   
+   from ot as ot 
+   inner join clientes as cli 
+   on (cli.codcli=ot.codcli and cli.codent=ot.codent) 
+   where Ot.FecOt BETWEEN '01/01/2011' and '07/02/2012' and ot.tipot in (14) and ot.estado!='A' and ot.codent='01' 
+  
+   --Lo facturado en el intervalo. 
+   
+   UNION select year(doc.fecdcto) as anio, 
+   MONTH(doc.fecdcto) as mes, 
+   day(doc.fecdcto) as dia, 
+   cli.RazCli as cliente, 
+   0 as inicialdolares, 
+   0 as inicialsoles, 
+   0 as sumadolares, 
+   0 as sumasoles, 
+   (case when (doc.mndcto=3) then doc.subtotal else 0 end) as factDolares, 
+   (case when (doc.mndcto=2) then doc.subtotal else 0 end) as factSoles, 
+   doc.fecdcto as fecha, 
+   doc.fec_reg as registro, 
+   ot.nroOt as numero, 
+   cli.codcli as codcli, 
+   ot.codot as codot 
+   
+   from documentos as doc 
+   inner join clientes as cli 
+   on (cli.codcli=doc.codcli and cli.codent=doc.codent) 
+   inner join ot on (ot.CodOt=doc.codot and ot.codent=doc.codent) 
+   where doc.fecdcto BETWEEN '01/01/2011' and '07/02/2012' and doc.tipdcto='FV' and doc.codent='01' and doc.estdcto!='A' and ot.tipot in (14) 
+
+    ) as temp where temp.codot='0007012' order by temp.anio,temp.mes,temp.cliente,temp.codcli
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

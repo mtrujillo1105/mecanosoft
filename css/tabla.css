@@ -1,0 +1,36 @@
+/* 
+    Document   : tabla
+    Created on : 17-abr-2013, 16:46:20
+    Author     : jorge.caceres
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.table_kpi {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-collapse: collapse;
+    font-size: 11pt;
+    font-family: calibri;
+}
+
+.table_kpi td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    padding: 2px;
+}
+
+.table_kpi th {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    padding: 2px;
+    border-collapse: collapse;
+    text-align: center;
+}

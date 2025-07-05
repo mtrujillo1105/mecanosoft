@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Metales Ingeniería y Construcción</title>        
+ 
+    <link rel="stylesheet" href="http://localhost/mimco/css/estilos.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/mimco/css/nav.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/mimco/css/theme.css" type="text/css">   
+
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="Content-Language" content="es"> 
+
+    <meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
+    <script type="text/javascript" src="http://localhost/mimco/js/jquery.js"></script>    
+ 
+    <script type="text/javascript" src="http://localhost/mimco/js/compras/ocompra.js"></script>
+
+ 
+<!----- Grafica ---------> 
+    <script type="text/javascript" src="http://localhost/mimco/js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="http://localhost/mimco/js/highcharts.js"></script>
+    <script type="text/javascript" src="http://localhost/mimco/js/exporting.js"></script>
+    <script type="text/javascript" src="http://localhost/mimco/js/highslide-full.min.js"></script>
+    <script type="text/javascript" src="http://localhost/mimco/js/highslide.config.js" charset="utf-8"></script>
+    <script type="text/javascript"> 
+    var example = 'column-parsed',
+            theme = 'default';
+    </script>
+    <script type="text/javascript" src="http://localhost/mimco/js/scripts.js"></script>
+
+    <script type="text/javascript"> 
+            Highcharts.theme = { colors: ['#4572A7'] };// prevent errors in default theme
+            var highchartsOptions = Highcharts.getOptions(); 
+    </script>
+    <!----- Grafica ------------>    
+
+
+    
+ <script type="text/javascript">
+
+                        Highcharts.visualize = function(table, options) {
+			// the categories
+			options.xAxis.categories = [];
+			jQuery('tbody th', table).each( function(i) {
+				options.xAxis.categories.push(this.innerHTML);
+			});
+			
+			// the data series
+			options.series = [];
+			jQuery('tr', table).each( function(i) {
+				var tr = this;
+				jQuery('th, td', tr).each( function(j) {
+					if (j > 0) { // skip first column
+						if (i == 0) { // get the name and init the series
+							options.series[j - 1] = { 
+								name: this.innerHTML,
+								data: []
+							};
+						} else { // add values
+							options.series[j - 1].data.push(parseFloat(this.innerHTML));
+						}
+					}
+				});
+			});
+			
+			var chart = new Highcharts.Chart(options);
+		}
+	
+		// On document ready, call visualize on the datatable.
+		jQuery(document).ready(function() {			
+			var table = document.getElementById('datatable'),
+			options = {
+				   chart: {
+				      renderTo: 'container2',
+				      defaultSeriesType: 'column'
+				   },
+				   title: {
+				      text: 'Indicadores de Otros Servicios para el 2011'
+				   },
+				   xAxis: {
+				   },
+				   yAxis: {
+				      title: {
+				         text: 'Cantidades'
+				      }
+				   },
+				   tooltip: {
+				      formatter: function() {
+				         return '<b>'+ this.series.name +'</b><br/>'+
+				            this.y +' '+ this.x.toLowerCase();
+				      }
+				   }
+				};
+	
+      					
+			Highcharts.visualize(table, options);
+		});
+	</script>   
+    
+    
+    
+
+
+</script>
+ 
+ 
+ 
+<script type="text/javascript">
+ 
+		var chart;
+		jQuery(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container3',
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: false
+				},
+				title: {
+					text: 'Porcentaje Requisiciones Afectuadas y Atendidas en el 2011'
+				},
+				tooltip: {
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: Highcharts.theme.textColor || '#000000',
+							connectorColor: Highcharts.theme.textColor || '#000000',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage*100)/100 +' %';
+							}
+						}
+					}
+				},
+			    series: [{
+					type: 'pie',
+					name: 'Browser share',
+					data: [
+     
+ 				
+    ['Efectuadas',   1414],
+    				
+    ['Atendidas',   753],
+    				
+            
+						
+					]
+				}]
+			});
+		});
+	</script>
+ 
+
+
+
+
+</head>
+<body>
+<div id="container">
+    <div class="header">REPORTE DE INDICADORES DE REQUISICIONES ATENDIDAS</div>	
+    <div class="case_top2">
+        
+        <form  class="frmAtendidas"  method="post" enctype="multipart/form-data" id="frmAtendidas">
+            <table width="98%" cellspacing="0" cellpadding="3" border="0" style="margin-top:5px;">
+                <tbody>
+                    <tr>
+                        <td align="right" width="18%"><span>PERIODO POR AÑO</span></td>
+                        <td align="left">
+                            <select disabled class="comboMedio" name="anio" id="anio">
+                                <option selected="selected" value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012 - Incompleto</option>
+                            </select>
+                        </td>  
+                        
+                        <td align="right" width="19%"><span>REQUISICIONES SOLICITADAS PARA</span></td>
+                        <td align="left" width="156">
+						<select class="desplegable" onchange="if(options[selectedIndex].value){location = options[selectedIndex].value}" class="desplegable" name="menu" size="1">
+						<option value="http://localhost/mimco/index.php/compras/ocompra/indicador_requis_materiales_estatico">Materiales</option>
+						<option value="http://localhost/mimco/index.php/compras/ocompra/indicador_requis_transporte_estatico">Transporte</option>
+						<option value="http://localhost/mimco/index.php/compras/ocompra/indicador_requis_otros_estatico" selected>Otros Servicios</option>
+						</select>                            
+                        </td>  
+                        
+                        <!--td align="right" width="18%"><span></span></td-->
+                        
+                        
+                        <td align="left" width="32%">
+                            <span>
+                                <input type="hidden" name="ver" id="ver">
+                                 <input type="hidden" name="tipo" id="tipo">
+                                 
+                                &nbsp;</span></td>   
+                        
+                    </tr>                                    
+                </tbody>
+            </table>
+        </form>
+    </div>
+    
+    <div class="case_botones">
+        <ul class="lista_botones"><li id="salir" class="atendidas">Salir</li></ul>          
+
+        <ul class="lista_botones">
+        <a href="javascript:void(0)" onclick="document.getElementById('light2').style.display='block';document.getElementById('fade').style.display='block'">
+        <li id="grafica" class="atendidas">Ver Gráfica2</li>
+        </a>
+        </ul>
+         
+        <ul class="lista_botones">
+        <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+        <li id="grafica" class="atendidas">Ver Gráfica1</li>
+        </a>
+        </ul>  
+
+        <ul class="lista_botones"><li id="excel" class="atendidas">Ver Excel</li></ul>
+        <ul class="lista_botones"><li id="pdf" class="atendidas">Ver Pdf</li></ul>
+    </div> 
+    
+    
+    <span style="float:left;width:80%;text-align:left;font-size:14px;margin-top:40px;">
+    Otras Requisiciones para el año 2011    </span>	
+        <div style="clear:both;">
+            <table border='1' width='100%'>
+                <THEAD>
+                <tr class="cabeceraTabla">
+                    <td width='200px;'>CONCEPTO MES</td>
+                    <td width='120px;'>ENERO</td>
+                    <td width='120px;'>FEBRERO</td>
+                    <td width='120px;'>MARZO</td>
+                    <td width='120px;'>ABRIL</td>
+                    <td width='120px;'>MAYO</td>
+                    <td width='120px;'>JUNIO</td>
+                    <td width='120px;'>JULIO</td>
+                    <td width='120px;'>AGOSTO</td>
+                    <td width='120px;'>SETIEMBRE</td>
+                    <td width='120px;'>OCTUBRE</td>
+                    <td width='120px;'>NOVIEMBRE</td>
+                    <td width='120px;'>DICIEMBRE</td>
+                    <td width='100px;'>TOTAL</td>
+                </tr>
+                </THEAD>
+               <tbody>
+               <tr>
+               <td>REQUISICIONES EFECTUADAS</td><td>
+		74</td>
+		<td>
+		83</td>
+		<td>
+		101</td>
+		<td>
+		77</td>
+		<td>
+		132</td>
+		<td>
+		129</td>
+		<td>
+		108</td>
+		<td>
+		137</td>
+		<td>
+		142</td>
+		<td>
+		148</td>
+		<td>
+		133</td>
+		<td>
+		150</td>
+		<td>
+		1414</td>
+
+               
+               </tr>
+               <tr>
+               <td>REQUISICIONES ATENDIDAS</td><td>
+		30</td>
+		<td>
+		40</td>
+		<td>
+		50</td>
+		<td>
+		29</td>
+		<td>
+		63</td>
+		<td>
+		69</td>
+		<td>
+		69</td>
+		<td>
+		83</td>
+		<td>
+		96</td>
+		<td>
+		94</td>
+		<td>
+		53</td>
+		<td>
+		77</td>
+		<td>
+		753</td>
+
+               </tr>
+               <tr>
+               <td>ÍNDICE DE ATENCIÓN (%)</td><td>
+		40.54</td>
+		<td>
+		48.19</td>
+		<td>
+		49.50</td>
+		<td>
+		37.66</td>
+		<td>
+		47.73</td>
+		<td>
+		53.49</td>
+		<td>
+		63.89</td>
+		<td>
+		60.58</td>
+		<td>
+		67.61</td>
+		<td>
+		63.51</td>
+		<td>
+		39.85</td>
+		<td>
+		51.33</td>
+		<td>
+		51.99</td>
+               </tr>
+               <tr>
+               <td>Atendidas en 24h o menos</td><td>
+		18</td>
+		<td>
+		28</td>
+		<td>
+		13</td>
+		<td>
+		14</td>
+		<td>
+		38</td>
+		<td>
+		29</td>
+		<td>
+		40</td>
+		<td>
+		47</td>
+		<td>
+		62</td>
+		<td>
+		52</td>
+		<td>
+		32</td>
+		<td>
+		41</td>
+		<td>
+		414</td>               </tr>
+               <tr>
+               <td>Atendidas entre 24 y 48h</td><td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+		<td>
+		0</td>
+               </tr>
+               <tr>
+               <td>Atendidas en más de 48h</td><td>
+		12</td>
+		<td>
+		12</td>
+		<td>
+		37</td>
+		<td>
+		15</td>
+		<td>
+		25</td>
+		<td>
+		40</td>
+		<td>
+		29</td>
+		<td>
+		36</td>
+		<td>
+		34</td>
+		<td>
+		42</td>
+		<td>
+		21</td>
+		<td>
+		36</td>
+		<td>
+		339</td>               </tr>
+                
+			 </tbody>
+            </table>
+        </div>		
+</div>	
+
+
+
+
+    <div style="border:3px solid #808080; padding:0px; display: none" id="light" class="modal">
+    
+    <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+	<img border="0" src="http://localhost/mimco/img/btn/b_salir_on.gif" width="79" height="27" align="right" hspace="0"></a> 
+       
+	<div id="container2" class="highcharts-container" style="height:410px; margin: 0 2em; clear:both; min-width: 750px">
+	</div>
+ 
+ 
+  
+        <table id="datatable" style="display:none;">
+
+	<tr height="20" style="height:15.0pt">
+
+		<td></td>
+		<td>REQUISICIONES EFECTUADAS</td>
+		<td>REQUISICIONES ATENDIDAS</td>
+	</tr>
+	
+        <tr><th>ENE.</th><td align='left'>74</td><td align='left'>30</td></tr><tr>
+        <th>FEB.</th><td align='left'>83</td><td align='left'>40</td></tr><tr>
+		<th>MAR.</th><td align='left'>101</td><td align='left'>50</td></tr><tr>
+		<th>ABR.</th><td align='left'>77</td><td align='left'>29</td></tr><tr>
+		<th>MAY.</th><td align='left'>132</td><td align='left'>63</td></tr><tr>
+		<th>JUN.</th><td align='left'>129</td><td align='left'>69</td></tr><tr>
+		<th>JUL.</th><td align='left'>108</td><td align='left'>69</td></tr><tr>
+		<th>AGO.</th><td align='left'>137</td><td align='left'>83</td></tr><tr>
+		<th>SET.</th><td align='left'>142</td><td align='left'>96</td></tr><tr>
+		<th>OCT.</th><td align='left'>148</td><td align='left'>94</td></tr><tr>
+		<th>NOV.</th><td align='left'>133</td><td align='left'>53</td></tr><tr>
+		<th>DIC.</th><td align='left'>150</td><td align='left'>77</td></tr>
+		
+		   
+
+</table>
+		
+    </div>
+    
+    
+    
+    
+    
+    <div style="border:3px solid #808080; padding:0px; display: none; position:absolute; left:100px; top:23px" id="light2" class="modal">
+    
+    <a href="javascript:void(0)" onclick="document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'">
+	<img border="0" src="http://localhost/mimco/img/btn/b_salir_on.gif" width="79" height="27" align="right" hspace="0"></a> 
+       
+	<div id="container3" class="highcharts-container" style="height:410px; margin: 0 2em; clear:both; min-width: 650px">
+	</div>
+		
+    </div>
+
+
+</body>
+</html>
